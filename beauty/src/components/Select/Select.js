@@ -1,6 +1,6 @@
 const Select = (props) => {
     return (
-        <select value={props.value} defaultValue={props.defaultValue} onChange={props.onChange}  className={props.className}>
+        <select onClick={props.onClick} ref={props.someRef} value={props.value} defaultValue={props.defaultValue} onChange={props.onChange}  className={props.className}>
             {props.children}
         </select>
     )

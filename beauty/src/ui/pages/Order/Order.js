@@ -1,11 +1,10 @@
 import Card from "../../Card/Card";
 import classes from '../../../ui/Global.module.css'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Input from "../../../components/Input/Input";
 import Button from '../../../components/Button/Button'
 import Select from "../../../components/Select/Select";
 import Option from "../../../components/Option/Option";
-
 import React, { useRef } from 'react';
 import emailjs from '@emailjs/browser';
 
@@ -17,14 +16,15 @@ const Order = (props) => {
         {value: 'Pedikyur', text: 'Pedikyur', id: 3},
         {value: 'Gellak', text: 'Gellak', id: 4},
     ];
-    const email = 'narekghazaryanjs@gmail.com';
+
     const [choosenDay, setChoosenDay] = useState('')
     const [choosenTime, setChoosenTime] = useState('')
-    let selected = options[0].value;
+    const [selected, setSelected] = useState(options[0].value) ;
+    // let selectedRef = useRef('')
 
     const getCalendarDetailsHandler = (event) => {
         const choosedDay  = event.target.value;
-        setChoosenDay(choosedDay)
+        setChoosenDay(choosedDay);
     }
 
     const getHours = (event) => {
@@ -32,16 +32,20 @@ const Order = (props) => {
         setChoosenTime(choosedHour)
     }
 
-    const orderChangeHandler = event => {
-       selected = event.target.value
-       console.log(selected)
+    const  orderChangeHandler = (event) => {
+        setSelected(event.target.value)
     }
+
+
+
+    
+   
     
 
     
     const form = useRef();
 
-    const sendEmail = (e,choosenDay) => {
+    const sendEmail = (e) => {
     e.preventDefault();
 
     emailjs.sendForm('service_5m6xpbe', 'template_fpd1kd7', form.current, '8Uw9LocK9V69Wp1uP')
@@ -57,7 +61,7 @@ const Order = (props) => {
         <Card style={{marginTop: '10vh'}} className={classes['.main']}> 
             <Input placeholder='choose the day' type='date' onChange={getCalendarDetailsHandler}  />
             <Input placeholder='choose time' type='number' onChange={getHours} />
-            <Select value={selected} onChange={orderChangeHandler}>
+            <Select defaultValue={selected} onChange={orderChangeHandler}>
               {options.map(option => (
                 <Option key={option.value} value={option.value}>
                   {option.text}
@@ -71,12 +75,12 @@ const Order = (props) => {
             <label>Name</label>
                <input type="text" name="user_name" />
                <label>Message</label>
-               <textarea name="message" />
-               <input type="submit" value="Send" />
+               <textarea readOnly  style={{display: "none"}} value={choosenDay + ' ' + choosenTime + ' ' + selected} name="message" />
+               <Button> order </Button>
             </form>
             </div>
            
-            <Button > order </Button>
+            
         </Card>
     )
 }
