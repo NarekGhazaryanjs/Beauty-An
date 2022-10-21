@@ -5,15 +5,16 @@ import Home from './ui/pages/Home/Home'
 import About from './ui/pages/About/About'
 import Order from './ui/pages/Order/Order';
 import Workers from './ui/pages/Workers/Workers';
+import Header from './ui/Header/Header';
 const App = () => {
   return (
     <Wrapper>
-      <header>
-         <Link to='/home'> Home </Link>
-         <Link to='./about'> About </Link>
-         <Link to='./order'> Order </Link>
-         <Link to='./workers'> Workers </Link>
-      </header>
+      <Header>
+         <Link to='/home'> Գլխավոր </Link>
+         <Link to='./about'> Մեր-մասին </Link>
+         <Link to='./order'> Պատվիրել </Link>
+         <Link to='./workers'> Մասնագետներ </Link>
+      </Header>
 
       <section>
         <Routes>

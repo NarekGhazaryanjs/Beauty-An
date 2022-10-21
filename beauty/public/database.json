@@ -1,0 +1,47 @@
+{
+    "workers": [
+        {
+          "img": "/cat1.jpg",
+          "expierence": 2,
+          "name": "Anna",
+          "region": "Erevan",
+          "id": 1
+        },
+
+        {
+            "img": "./cat2.jpg",
+            "expierence": 2,
+            "name": "Anna",
+            "region": "Erevan",
+            "id": 2
+        },
+        {
+          "img": "./cat3.jpg",
+          "expierence": 2,
+          "name": "Anna",
+          "region": "Erevan",
+          "id": 3
+        },
+        {
+          "img": "./cat3.jpg",
+          "expierence": 2,
+          "name": "Dave",
+          "region": "Erevan",
+          "id": 4
+        },
+        {
+            "img": "./cat2.jpg",
+            "expierence": 2,
+            "name": "Dave",
+            "region": "Erevan",
+            "id": 5
+        },
+        {
+            "img": "./cat3.jpg",
+            "expierence": 2,
+            "name": "Dave",
+            "region": "Erevan",
+            "id": 6
+        }
+    ]
+}
