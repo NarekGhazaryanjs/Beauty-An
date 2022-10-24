@@ -6,6 +6,7 @@ const Input = (props) => {
            ref={props.inputRef}
            placeholder={props.placeholder}
            type={props.type || 'text'}
+           name={props.name}
         />
     )
 }

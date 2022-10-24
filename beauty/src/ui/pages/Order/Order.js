@@ -1,12 +1,15 @@
 import Card from "../../Card/Card";
 import classes from '../../../ui/Global.module.css'
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Input from "../../../components/Input/Input";
 import Button from '../../../components/Button/Button'
 import Select from "../../../components/Select/Select";
 import Option from "../../../components/Option/Option";
 import React, { useRef } from 'react';
 import emailjs from '@emailjs/browser';
+import Form from "../../../components/Form/Form";
+import Text from "../../../components/Text/Text";
+import Textarea from "../../../components/Textarea/Textarea";
 
 
 const Order = (props) => {
@@ -17,8 +20,10 @@ const Order = (props) => {
         {value: 'Gellak', text: 'Gellak', id: 4},
     ];
 
+    const [name, setName] = useState('');
     const [choosenDay, setChoosenDay] = useState('')
     const [choosenTime, setChoosenTime] = useState('')
+    const [choosenAddress, setChoosenAddress] = useState('')
     const [selected, setSelected] = useState(options[0].value) ;
     // let selectedRef = useRef('')
 
@@ -36,13 +41,6 @@ const Order = (props) => {
         setSelected(event.target.value)
     }
 
-
-
-    
-   
-    
-
-    
     const form = useRef();
 
     const sendEmail = (e) => {
@@ -56,31 +54,46 @@ const Order = (props) => {
       });
     }
 
+    const getAddress = (event) => {
+        setChoosenAddress(event.target.value)
+    }
+
+    const getName = (event) => {
+        setName(event.target.value)
+    }
+
+    const allData = {
+        choosenAddress,
+        choosenDay,
+        choosenTime,
+        selected,
+        name
+    }
+
 
     return (
-        <Card style={{marginTop: '10vh'}} className={classes['.main']}> 
-            <Input placeholder='choose the day' type='date' onChange={getCalendarDetailsHandler}  />
-            <Input placeholder='choose time' type='number' onChange={getHours} />
-            <Select defaultValue={selected} onChange={orderChangeHandler}>
-              {options.map(option => (
-                <Option key={option.value} value={option.value}>
-                  {option.text}
-                </Option>
-              ))}
-            </Select>
-
-
-            <div>
-            <form ref={form} onSubmit={sendEmail}>
-            <label>Name</label>
-               <input type="text" name="user_name" />
-               <label>Message</label>
-               <textarea readOnly  style={{display: "none"}} value={choosenDay + ' ' + choosenTime + ' ' + selected} name="message" />
-               <Button> order </Button>
-            </form>
-            </div>
-           
-            
+        <Card  className={classes['main']}> 
+            <Card className={classes['form-of-user']}>
+                <Input placeholder='choose the day' type='date' onChange={getCalendarDetailsHandler}  />
+                <Input placeholder='choose time' type='number' onChange={getHours} />
+                <Input placeholder="address" type="text" onChange={getAddress} />
+                <Select defaultValue={selected} onChange={orderChangeHandler}>
+                  {options.map(option => (
+                    <Option key={option.value} value={option.value}>
+                      {option.text}
+                    </Option>
+                  ))}
+                </Select>
+                <Form className={classes['form']}  formref={form} onSubmit={sendEmail}>
+                      <Card>
+                         <Text>Name</Text>
+                         <Input name="user_name" onChange={getName} />
+                      </Card>
+                   
+                      <Textarea  readOnly  style={{display: "none"}} value={JSON.stringify(allData)} name="message" />
+                      <Button className={classes['order-button']}> order </Button>
+                </Form>
+            </Card>
         </Card>
     )
 }
