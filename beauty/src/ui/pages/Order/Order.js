@@ -24,6 +24,7 @@ const Order = (props) => {
     const [choosenDay, setChoosenDay] = useState('')
     const [choosenTime, setChoosenTime] = useState('')
     const [choosenAddress, setChoosenAddress] = useState('')
+    const [phone, setPhone] = useState('')
     const [selected, setSelected] = useState(options[0].value) ;
     // let selectedRef = useRef('')
 
@@ -35,6 +36,11 @@ const Order = (props) => {
     const getHours = (event) => {
         const choosedHour = event.target.value;
         setChoosenTime(choosedHour)
+    }
+
+    const getPhone = (event) => {
+        const choosedPhone = event.target.value;
+        setPhone(choosedPhone)
     }
 
     const  orderChangeHandler = (event) => {
@@ -63,11 +69,12 @@ const Order = (props) => {
     }
 
     const allData = {
-        choosenAddress,
-        choosenDay,
-        choosenTime,
-        selected,
-        name
+        adress:  choosenAddress,
+        day: choosenDay,
+        time: choosenTime,
+        type: selected,
+        telephone: phone,
+        userName: name
     }
 
 
@@ -75,8 +82,9 @@ const Order = (props) => {
         <Card  className={classes['main']}> 
             <Card className={classes['form-of-user']}>
                 <Input placeholder='choose the day' type='date' onChange={getCalendarDetailsHandler}  />
-                <Input placeholder='choose time' type='number' onChange={getHours} />
+                <Input placeholder='choose time' type='time' onChange={getHours} />
                 <Input placeholder="address" type="text" onChange={getAddress} />
+                <Input placeholder="phone number" type="tel" onChange={getPhone} />
                 <Select defaultValue={selected} onChange={orderChangeHandler}>
                   {options.map(option => (
                     <Option key={option.value} value={option.value}>
